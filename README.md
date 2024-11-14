@@ -5,16 +5,16 @@
 
 <h3>Pré-requisitos</h3>
 <ul>
-    <li>PHP >= 7.3</li>
+    <li>PHP ^8.2</li>
     <li>Composer</li>
-    <li>Node.js</li>
+    <li>Node.js ^18.20</li>
     <li>NPM</li>
 </ul>
 
 <h3>Instalação</h3>
 <ol>
     <li>Clone o repositório para sua máquina local:
-        <pre><code>git clone https://github.com/seu-usuario/seu-repositorio.git</code></pre>
+        <pre><code>git clone https://github.com/GustavoMinelli/Library.git</code></pre>
     </li>
     <li>Entre no diretório do projeto:
         <pre><code>cd seu-repositorio</code></pre>
