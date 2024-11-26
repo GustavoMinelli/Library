@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Livros') }}
+            {{ __('Clientes') }}
         </h2>
     </x-slot>
 
@@ -10,48 +10,44 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="flex mb-3 justify-end">
-                <x-primary-link-button href="{{ route('books.create') }}">
-                    {{ __('Novo Livro') }}
+                <x-primary-link-button href="{{ route('customers.create') }}">
+                    {{ __('Novo cliente') }}
                 </x-primary-link-button>
             </div>
 
             <div class="bg-white overflow-hidden h-[600px] shadow-sm sm:rounded-lg">
                 <div class="p-6 h-full flex flex-col text-gray-900">
                     
-                    @if (count($books) > 0)
+                    @if (count($customers) > 0)
                     <table class="table md:table-auto relative h-full mb-5 table-fixed w-full text-center border-solid">
                         <thead>
                             <tr class="border-solid border-0 border-b border-slate-700">
                                 <th class="">ID</th>
-                                <th class="">Titulo</th>
-                                <th class="">Autor</th>
-                                <th class="">Disponível</th>
-                                <th class="">Gênero</th>
+                                <th class="">Nome</th>
+                                <th class="">Email</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
 
                         <tbody class="h-10">
 
-                            @foreach ($books as $book)
+                            @foreach ($customers as $customer)
 
                                 <tr class="border-solid border-0 border-b border-slate-700 last:border-transparent">
-                                    <td>{{ $book->id }}</td>
-                                    <td>{{ $book->title }}</td>
-                                    <td>{{ $book->author }}</td>
-                                    <td>{{ $book->is_available ? 'Sim' : 'Não'}}</td>
-                                    <td>{{ $book->genre->name }}</td>
+                                    <td>{{ $customer->id }}</td>
+                                    <td>{{ $customer->name }}</td>
+                                    <td>{{ $customer->email }}</td>
                                     <td>
-                                        <x-primary-link-button href="{{ url('/livros/'.$book->id.'/editar') }}">
+                                        <x-primary-link-button href="{{ url('/clientes/'.$customer->id.'/editar') }}">
                                             <i class="fas fa-edit"></i></x-primary-link-button>
 
                                         <x-danger-button
                                                 x-data=""
-                                                x-on:click.prevent="$dispatch('open-modal', 'confirm-book-delete-{{ $book->id }}')"
+                                                x-on:click.prevent="$dispatch('open-modal', 'confirm-customer-delete-{{ $customer->id }}')"
                                             ><i class="fas fa-trash"></i></x-danger-button>
 
-                                            <x-modal name="confirm-book-delete-{{ $book->id }}">
-                                                <form method="post" action="{{ url("livros/$book->id") }}" class="p-6">
+                                            <x-modal name="confirm-customer-delete-{{ $customer->id }}">
+                                                <form method="post" action="{{ url("clientes/$customer->id") }}" class="p-6">
 
                                                     @csrf
                                                     @method('DELETE')
@@ -82,12 +78,12 @@
                             <i class="fas fa-exclamation-triangle"></i>
                         </div>
                         <div class="text-gray-900 text-2xl font-bold mb-2">
-                            Nenhum livro cadastrado
+                            Nenhum cliente cadastrado
                         </div>
                     </div>
                 @endif
 
-                {{ $books->links() }}
+                {{ $customers->links() }}
 
                 </div>
             </div>

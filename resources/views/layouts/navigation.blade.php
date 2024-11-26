@@ -14,7 +14,7 @@
                     $navLinks = [
                         ['route' => 'dashboard', 'label' => 'Dashboard'],
                         ['route' => 'books.index', 'label' => 'Livros'],
-                        // ['route' => 'authors', 'label' => 'Autores'],
+                        ['route' => 'customers.index', 'label' => 'Clientes'],
                         // ['route' => 'publishers', 'label' => 'Editoras'],
                         // ['route' => 'categories', 'label' => 'Categorias'],
                         // ['route' => 'users', 'label' => 'Usuários'],

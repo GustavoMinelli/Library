@@ -13,6 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
 
     require __DIR__.'/resources/book.php';
+    require __DIR__.'/resources/customer.php';
 
 });
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use App\Models\BookGenre;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -66,7 +67,7 @@ class BookController extends Controller
      */
     public function index(): View
     {
-        $books = Book::orderBy('id')->paginate(10);
+        $books = Book::orderBy('id', 'desc')->paginate(10);
 
         $data = [
             'books' => $books,
@@ -80,7 +81,7 @@ class BookController extends Controller
      *
      * @return void
      */
-    public function create()
+    public function create(): View
     {
         return $this->form(new Book());
     }
@@ -91,16 +92,14 @@ class BookController extends Controller
      * @param BookRequest $request
      * @return void
      */
-    public function insert(BookRequest $request)
+    public function insert(BookRequest $request): RedirectResponse
     {
 
-        dd($request->all());
-
         if ($this->save($request, new Book())) {
-            return redirect('books.index')->with('success', 'Livro criado com sucesso!');
+            return redirect()->route('books.index')->with('success', 'Livro criado com sucesso!');
         }
 
-        return redirect('books.create')->whith('error', 'Não foi possível inserir o livro. Tente novamente mais tarde.');
+        return redirect()->route('books.create')->whith('error', 'Não foi possível inserir o livro. Tente novamente mais tarde.');
 
     }
 
@@ -110,7 +109,7 @@ class BookController extends Controller
      * @param Book $book
      * @return void
      */
-    public function edit(Book $book)
+    public function edit(Book $book): View
     {
         if (!$book) {
             return redirect('books.index')->with('error', 'Livro não encontrado.');
@@ -120,11 +119,9 @@ class BookController extends Controller
 
     }
 
-    public function update(BookRequest $request)
+    public function update(BookRequest $request): RedirectResponse
     {
         $book = Book::find($request->id);
-
-        // dd($request->all());
 
         if (!$book) {
             return redirect()->route('books.index')->with('error', 'Livro não encontrado.');
@@ -136,5 +133,19 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->whith('error', 'Não foi possível atualizar o livro. Tente novamente mais tarde.');
 
+    }
+
+    public function destroy(Book $book): RedirectResponse
+    {
+        try {
+
+            $book->delete();
+            return redirect()->route('books.index')->with('success', 'Livro deletado com sucesso!');
+
+        } catch (\Exception $e) {
+            Log::info('[BOOK-CONTROLLER][DESTROY] Erro ao deletar livro: ' . $e->getMessage());
+            return redirect()->route('books.index')->with('error', 'Não foi possível deletar o livro. Tente novamente mais tarde.');
+        }
+        
     }
 }

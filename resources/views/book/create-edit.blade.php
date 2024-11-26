@@ -34,7 +34,7 @@
                         <input type="hidden" name="id" value="{{ $book->id }}">
 
                         <div class="flex items-center mb-3">
-                            <input id="is_available" name="is_available" type="checkbox" {{ $book->is_available ? 'checked' : '' }} class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <input id="is_available" name="is_available" type="checkbox" {{ $book->is_available ? 'checked="checked"' : '' }} class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                             <label for="is_available" class="ml-2 block text-sm text-gray-900">
                                 Disponível
                             </label>
