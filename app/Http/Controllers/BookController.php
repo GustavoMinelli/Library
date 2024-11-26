@@ -36,11 +36,9 @@ class BookController extends Controller
             return true;
 
         } catch (\Exception $e) {
-
             DB::rollBack();
             Log::info('[BOOK-CONTROLLER][SAVE] Erro ao salvar livro: ' . $e->getMessage());
             return false;
-
         }
 
     }
@@ -119,6 +117,12 @@ class BookController extends Controller
 
     }
 
+    /**
+     * Atualiza um livro no banco de dados.
+     *
+     * @param BookRequest $request
+     * @return RedirectResponse
+     */
     public function update(BookRequest $request): RedirectResponse
     {
         $book = Book::find($request->id);
@@ -135,6 +139,12 @@ class BookController extends Controller
 
     }
 
+    /**
+     * Deleta um livro do banco de dados.
+     *
+     * @param Book $book
+     * @return RedirectResponse
+     */
     public function destroy(Book $book): RedirectResponse
     {
         try {

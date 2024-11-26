@@ -17,7 +17,7 @@
         <pre><code>git clone https://github.com/GustavoMinelli/Library.git</code></pre>
     </li>
     <li>Entre no diretório do projeto:
-        <pre><code>cd seu-repositorio</code></pre>
+        <pre><code>cd Library</code></pre>
     </li>
     <li>Copie o arquivo de exemplo do ambiente:
         <pre><code>cp .env.example .env</code></pre>
@@ -32,7 +32,7 @@
         <pre><code>php artisan key:generate</code></pre>
     </li>
     <li>Execute as migrações do banco de dados:
-        <pre><code>php artisan migrate</code></pre>
+        <pre><code>php artisan migrate:fresh --seed</code></pre>
     </li>
     <li>Inicie o servidor de desenvolvimento:
         <pre><code>php artisan serve</code></pre>

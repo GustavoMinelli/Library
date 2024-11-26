@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     require __DIR__.'/resources/book.php';
     require __DIR__.'/resources/customer.php';
+    require __DIR__.'/resources/book-rent.php';
 
 });
 

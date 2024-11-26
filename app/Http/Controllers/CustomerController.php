@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Log;
 class CustomerController extends Controller
 {
 
+    /**
+     * Salva um cliente no banco de dados.
+     *
+     * @param CustomerRequest $request
+     * @param Customer $customer
+     * @return boolean
+     */
     private function save(CustomerRequest $request, Customer $customer): bool
     {
         try {
@@ -35,6 +42,12 @@ class CustomerController extends Controller
         
     }
 
+    /**
+     * Carrega o formulário de criação/edição de um cliente.
+     *
+     * @param Customer $customer
+     * @return View
+     */
     private function form(Customer $customer): View
     {
         $data = [
@@ -44,7 +57,11 @@ class CustomerController extends Controller
         return view('customer.create-edit', $data);
     }
 
-
+    /**
+     * Carrega a lista de clientes.
+     *
+     * @return View
+     */
     public function index(): View
     {
         return view('customer.index', [
@@ -53,11 +70,22 @@ class CustomerController extends Controller
     }
 
 
+    /**
+     * Carrega o formulário de criação de um cliente.
+     *
+     * @return View
+     */
     public function create(): View
     {   
         return $this->form(new Customer());
     }
 
+    /**
+     * Insere um novo cliente.
+     *
+     * @param CustomerRequest $request
+     * @return RedirectResponse
+     */
     public function insert(CustomerRequest $request): RedirectResponse
     {
         $customer = new Customer();
@@ -70,11 +98,23 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * Carrega o formulário de edição de um cliente.
+     *
+     * @param Customer $customer
+     * @return View
+     */
     public function edit(Customer $customer): View
     {
         return $this->form($customer);
     }
 
+    /**
+     * Atualiza um cliente.
+     *
+     * @param CustomerRequest $request
+     * @return RedirectResponse
+     */
     public function update(CustomerRequest $request): RedirectResponse
     {
         $customer = Customer::find($request->id);
@@ -86,6 +126,12 @@ class CustomerController extends Controller
         return redirect()->route('customers.edit', $customer->id)->with('error', 'Erro ao atualizar cliente!');
     }
 
+    /**
+     * Deleta um cliente.
+     *
+     * @param Customer $customer
+     * @return RedirectResponse
+     */
     public function destroy(Customer $customer): RedirectResponse
     {
         try {

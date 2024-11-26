@@ -15,9 +15,7 @@
                         ['route' => 'dashboard', 'label' => 'Dashboard'],
                         ['route' => 'books.index', 'label' => 'Livros'],
                         ['route' => 'customers.index', 'label' => 'Clientes'],
-                        // ['route' => 'publishers', 'label' => 'Editoras'],
-                        // ['route' => 'categories', 'label' => 'Categorias'],
-                        // ['route' => 'users', 'label' => 'Usuários'],
+                        ['route' => 'book-rents.index', 'label' => 'Aluguel de Livros'],
                     ];
                 @endphp
 
